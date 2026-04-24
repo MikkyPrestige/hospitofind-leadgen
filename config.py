@@ -20,13 +20,13 @@ REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT")  # e.g., "HospitoFindLeadGen 
 # =============================================================================
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
-SMTP_SERVER = "smtp.gmail.com"        # For Outlook use: smtp.office365.com
+SMTP_SERVER = "smtp.office365.com"
 SMTP_PORT = 587
 
 # =============================================================================
 # 3. Google Sheets
 # =============================================================================
-SHEET_ID = os.getenv("GOOGLE_SHEET_ID")
+SHEET_ID = os.getenv("SHEET_ID")
 SHEET_NAME_LEADS = "Leads"
 SHEET_NAME_SENT_LOG = "Sent_Log"
 SHEET_NAME_BLACKLIST = "Blacklist"
@@ -200,3 +200,23 @@ LOG_DIR = "logs"
 LOG_FILE = os.path.join(LOG_DIR, "hospitofind.log")
 LOG_FORMAT = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 LOG_LEVEL = "INFO"                  # Can be DEBUG for more verbose output
+
+# =============================================================================
+# 13. Reddit mock mode (to be removed when Reddit API access is granted)
+# =============================================================================
+REDDIT_MOCK_ENABLED = True         # Set to False when real Reddit credentials work
+MOCK_PROFILES = {
+    # username: { "public_email": ..., "display_name": ... }
+    "john_doe": {
+        "public_email": None,
+        "display_name": "John Doe"
+    },
+    "alice_smith": {
+        "public_email": "alice.smith@example.com",
+        "display_name": "Alice Smith"
+    },
+    "test_bot_user": {
+        "public_email": None,
+        "display_name": "Test Bot"
+    }
+}
