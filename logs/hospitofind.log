@@ -104,3 +104,10 @@
 2026-04-25 03:01:03,423 [INFO] HospitoFind: Email result for u/tom_jones: dry_run_skipped
 2026-04-25 03:01:03,427 [INFO] HospitoFind: Run complete. Processed 2 new leads.
 2026-04-25 03:01:03,427 [INFO] HospitoFind: ============================================================
+2026-04-25 04:42:59,892 [INFO] HospitoFind: ============================================================
+2026-04-25 04:42:59,892 [INFO] HospitoFind: HospitoFind Lead Generation Run — 2026-04-25T04:42:59.892188
+2026-04-25 04:42:59,892 [INFO] HospitoFind: DRY_RUN: True
+2026-04-25 04:43:01,970 [ERROR] HospitoFind: IMAP error: b'AUTHENTICATE failed.'
+2026-04-25 04:43:01,970 [INFO] HospitoFind: Fetched 0 posts to evaluate
+2026-04-25 04:43:01,970 [INFO] HospitoFind: Run complete. Processed 0 new leads.
+2026-04-25 04:43:01,970 [INFO] HospitoFind: ============================================================
