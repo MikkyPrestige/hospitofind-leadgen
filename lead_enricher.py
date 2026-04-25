@@ -9,14 +9,16 @@ import re
 from email_validator import validate_email, EmailNotValidError
 from dns import resolver
 
-from config import EMAIL_PATTERNS, REDDIT_MOCK_ENABLED, MOCK_PROFILES
+from config import (
+    EMAIL_PATTERNS, REDDIT_MOCK_ENABLED, MOCK_PROFILES
+)
 
 log = logging.getLogger("HospitoFind")
+
 
 # ---------------------------------------------------------------------------
 # Placeholder: Reddit profile lookup (to be implemented after Reddit API grant)
 # ---------------------------------------------------------------------------
-
 def _fetch_reddit_profile(username):
     """
     Fetch Reddit profile data.
@@ -48,7 +50,7 @@ def extract_name(username, post_text=""):
     Try to find a real name. Looks in:
         - Reddit profile (placeholder)
         - Post text (crude heuristic: capitalized words not in a blacklist)
-    Returns a string or None.
+    If the result looks generic or is "Keyword", fall back to the Reddit username.
     """
     profile = _fetch_reddit_profile(username)
     display_name = profile.get("display_name")
@@ -56,16 +58,19 @@ def extract_name(username, post_text=""):
         return display_name
 
     # Very simple heuristic: find the first word that starts with a capital
-    # and is not a common stopword or the username.
-    stopwords = {"I", "I'm", "I'll", "I've", "Hey", "Hi", "Hello", "Thanks", "Please", "My", "Where", "What", "When",  "Why", "How", "Can", "Do", "Does", "Is", "Are"}
+    # and is not a common stopword, the username, or a known junk word
+    stopwords = {"I", "I'm", "I'll", "I've", "Hey", "Hi", "Hello",
+                 "Thanks", "Please", "My", "Where", "What", "When",
+                 "Why", "How", "Can", "Do", "Does", "Is", "Are",
+                 "Keyword", "Reddit", "F5Bot", "Alert", "Unknown"}
     words = post_text.split()
     for word in words:
         clean = word.strip(",.?!;:'\"")
         if clean and clean[0].isupper() and clean not in stopwords and clean != username:
-            # Avoid strings that look like numbers or URLs
             if not re.search(r'[0-9]', clean):
                 return clean
-    return None
+    # Fall back to username
+    return username
 
 
 # ---------------------------------------------------------------------------
@@ -131,13 +136,26 @@ def enrich_lead(username, post_text=""):
             "name": str or None,
             "public_email": str or None,
             "guessed_emails": list of {"email": str, "confidence": str},
-            "best_email": str or None,       # first high-confidence guess, or first medium
+            "best_email": str or None,
             "email_confidence": str or None
         }
     """
     profile = _fetch_reddit_profile(username)
     public_email = profile.get("public_email")
     name = extract_name(username, post_text)
+
+    # ------------------------------------------------------------
+    # Safety: if the username is a placeholder, skip email guessing
+    # ------------------------------------------------------------
+    if username.lower() in ("unknown_author", "deleted", "removed", "keyword"):
+        return {
+            "username": username,
+            "name": name,
+            "public_email": None,
+            "guessed_emails": [],
+            "best_email": None,
+            "email_confidence": None
+        }
 
     # If profile has a public email, validate it
     if public_email:

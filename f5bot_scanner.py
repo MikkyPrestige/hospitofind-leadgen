@@ -61,32 +61,53 @@ def _parse_f5bot_email(msg):
 
     full_text = subject + "\n" + body
 
-    # 1. Extract subreddit, title, author from a line like:
-    #    Reddit Comments (/r/HealthInsurance/): Dental Insurance Question by AutoModerator
+    # 1. Extract subreddit, title, author
     subreddit = "unknown"
     title = "Unknown Title"
     author = "unknown_author"
 
+    # Try pattern: "Reddit Comments (/r/...): <title> by <author>"
     match = re.search(
-        r'Reddit\s+(?:Comments|Posts)\s+\(/r/([^)/]+)\):\s*([^,]+?)(?:\s+by\s+(.+?))?(?:\n|$)',
+        r'Reddit\s+(?:Comments|Posts)\s+\(/r/([^)/]+)\):\s*(.+?)\s+by\s+(\S+)',
         full_text
     )
     if match:
         subreddit = match.group(1)
-        title = match.group(2).strip()
-        author = match.group(3).strip() if match.group(3) else "unknown_author"
+        title = match.group(2).strip().rstrip('.')
+        author = match.group(3).strip()
     else:
-        sr_match = re.search(r'/r/(\w+)', full_text)
-        if sr_match:
-            subreddit = sr_match.group(1)
+        # Fallback 1: "Reddit Comments (/r/...): <title> ..." maybe author at end after "by"
+        match2 = re.search(
+            r'Reddit\s+(?:Comments|Posts)\s+\(/r/([^)/]+)\):\s*(.+)',
+            full_text
+        )
+        if match2:
+            subreddit = match2.group(1)
+            rest = match2.group(2).strip()
+            if " by " in rest:
+                parts = rest.rsplit(" by ", 1)
+                title = parts[0].strip()
+                author = parts[1].strip().rstrip('.')
+            else:
+                title = rest
+        else:
+            sr_match = re.search(r'/r/(\w+)', full_text)
+            if sr_match:
+                subreddit = sr_match.group(1)
 
-    # 2. Use email subject as title if better
+    # 2. If author still unknown, look for "by u/..." or just "u/..."
+    if author == "unknown_author":
+        user_match = re.search(r'(?:by\s+)?u/(\w+)', full_text)
+        if user_match:
+            author = user_match.group(1)
+
+    # 3. Use email subject as title if better
     if subject.startswith("F5Bot found something:"):
         keyword_part = subject.split(":", 1)[1].strip()
         if title == "Unknown Title":
             title = f"Mention: {keyword_part}"
 
-    # 3. Extract the actual comment text (the sentence containing the keyword)
+    # 4. Extract the actual comment text (sentence containing the keyword)
     post_body = title
     keywords_to_check = ["nearest hospital", "healthcare in", "emergency clinic",
                          "need hospital", "can't find", "hospital near me",
@@ -97,11 +118,11 @@ def _parse_f5bot_email(msg):
             post_body = line.strip()
             break
 
-    # 4. Generate a unique ID from the email's Message-ID (or timestamp)
+    # 5. Generate a unique ID from the email's Message-ID (or timestamp)
     message_id = msg.get("Message-ID", str(int(time.time())))
     post_id = f"f5bot-{message_id.strip('<>')}"
 
-    # 5. Use email date as timestamp
+    # 6. Use email date as timestamp
     date_str = msg["Date"]
     try:
         from email.utils import parsedate_to_datetime
@@ -109,7 +130,7 @@ def _parse_f5bot_email(msg):
     except Exception:
         created_utc = time.time()
 
-    # 6. Construct a fake URL for deduplication
+    # 7. Construct a fake URL for deduplication
     url = f"https://reddit.com/r/{subreddit}/comments/{post_id}"
 
     return {
