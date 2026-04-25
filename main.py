@@ -8,13 +8,18 @@ from datetime import datetime
 
 from config import DRY_RUN, MIN_INTENT_SCORE
 from utils import setup_logging, load_sent_ids, save_sent_lead, load_blacklist, is_blacklisted
-from reddit_scanner import fetch_recent_posts
 from intent_filter import score_post, is_qualified
 from lead_enricher import enrich_lead
 from message_generator import create_messages
 from reddit_pm import send_pm, reset_pm_counter
 from email_sender import send_email, reset_email_counter
 from google_sheets import append_lead
+from config import F5BOT_ENABLED
+
+if F5BOT_ENABLED:
+    from f5bot_scanner import fetch_recent_posts
+else:
+    from reddit_scanner import fetch_recent_posts
 
 log = setup_logging()
 

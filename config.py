@@ -231,3 +231,12 @@ MOCK_PROFILES = {
         "display_name": "Test Bot"
     }
 }
+
+# =============================================================================
+# 14. F5Bot fallback (real leads via email until Reddit API access is restored)
+# =============================================================================
+F5BOT_ENABLED = True          # Set to True to use F5Bot instead of mock/real Reddit
+IMAP_SERVER = os.getenv("IMAP_SERVER", "outlook.office365.com")
+IMAP_PORT = int(os.getenv("IMAP_PORT", "993"))
+# F5Bot emails are sent by "alerts@f5bot.com" — adjust if needed
+F5BOT_SENDER = "alerts@f5bot.com"
