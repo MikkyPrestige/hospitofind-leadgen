@@ -222,6 +222,10 @@ MOCK_PROFILES = {
         "public_email": "alice.smith@example.com",
         "display_name": "Alice Smith"
     },
+        "tom_jones": {
+        "public_email": "tom@example.com",
+        "display_name": "Tom"
+    },
     "test_bot_user": {
         "public_email": None,
         "display_name": "Test Bot"
