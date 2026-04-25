@@ -116,48 +116,37 @@ def _parse_f5bot_email(msg):
 
 @retry(max_attempts=2, delay=5, exceptions=(Exception,))
 def fetch_recent_posts():
-    """
-    Connect to IMAP, read unread F5Bot emails, parse them, mark them as read,
-    and return a list of post dicts.
-    """
     posts = []
     try:
         mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
         mail.login(EMAIL_ADDRESS, EMAIL_APP_PASSWORD)
         mail.select("inbox")
 
-        # Search for unseen emails from F5Bot
-        status, messages = mail.search(None, f'(UNSEEN FROM "{F5BOT_SENDER}")')
-        if status != "OK":
-            log.warning("IMAP search failed: %s", status)
-            mail.logout()
-            return posts
+        # Fetch ALL unread emails (ignore sender for now)
+        status, messages = mail.search(None, 'UNSEEN')
+        if status == "OK":
+            email_ids = messages[0].split()
+            log.info("Found %d total unread emails", len(email_ids))
+            for eid in email_ids[:20]:   # limit for safety
+                res, msg_data = mail.fetch(eid, "(RFC822)")
+                if res != "OK":
+                    continue
+                msg = email.message_from_bytes(msg_data[0][1])
+                subject = _decode_email_header(msg["Subject"])
+                from_addr = msg["From"]
+                log.info("Unseen – From: %s | Subject: %s", from_addr, subject)
 
-        email_ids = messages[0].split()
-        log.info("Found %d unread F5Bot emails", len(email_ids))
-
-        for eid in email_ids:
-            # Fetch the email
-            res, msg_data = mail.fetch(eid, "(RFC822)")
-            if res != "OK":
-                continue
-
-            raw_email = msg_data[0][1]
-            msg = email.message_from_bytes(raw_email)
-
-            parsed = _parse_f5bot_email(msg)
-            if parsed:
-                posts.append(parsed)
-                log.info("Parsed F5Bot alert: %s", parsed["url"])
-
-            # Mark as read
-            mail.store(eid, '+FLAGS', '\\Seen')
-
+                # If we find any email containing "f5bot" in the sender, parse it
+                if "f5bot" in from_addr.lower():
+                    parsed = _parse_f5bot_email(msg)
+                    if parsed:
+                        posts.append(parsed)
+                        log.info("Successfully parsed F5Bot alert")
+                    else:
+                        log.warning("Failed to parse F5Bot email")
+                # Do NOT mark as read so we can reuse for testing
         mail.close()
         mail.logout()
-    except imaplib.IMAP4.error as e:
-        log.error("IMAP error: %s", e)
     except Exception as e:
-        log.error("Unexpected error fetching F5Bot emails: %s", e)
-
+        log.error("Error: %s", e)
     return posts
