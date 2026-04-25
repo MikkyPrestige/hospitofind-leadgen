@@ -42,7 +42,7 @@ jobs:
           echo "TENANT_ID=${{ secrets.TENANT_ID }}" >> .env
           echo "REFRESH_TOKEN=${{ secrets.REFRESH_TOKEN }}" >> .env
 
-                - name: Debug secrets and files
+      - name: Debug secrets and files
         run: |
           echo "=== .env contents (masked) ==="
           cat .env | sed 's/=.*/=****/'
