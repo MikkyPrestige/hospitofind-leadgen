@@ -1,3 +1,0 @@
-Timestamp,Post_URL,Subreddit,Author,Name,Email,Email_Confidence,Outreach_Channel,Status,Notes
-2026-04-25 03:00:56,https://reddit.com/r/digitalnomad/comments/mock001,digitalnomad,john_doe,John Doe,john_doe@gmail.com,high,pm,dry_run_skipped,"Categories: {'need', 'strong_intent', 'competitor'}"
-2026-04-25 03:01:03,https://reddit.com/r/solotravel/comments/mock003,solotravel,tom_jones,,tom_jones@gmail.com,high,pm,dry_run_skipped,"Categories: {'need', 'travel', 'strong_intent', 'country'}"
