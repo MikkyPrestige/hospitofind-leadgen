@@ -223,7 +223,7 @@ MOCK_PROFILES = {
         "display_name": "Alice Smith"
     },
         "tom_jones": {
-        "public_email": "tom@example.com",
+        "public_email": None,
         "display_name": "Tom"
     },
     "test_bot_user": {
