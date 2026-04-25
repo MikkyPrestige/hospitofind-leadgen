@@ -44,3 +44,14 @@ jobs:
 
       - name: Run lead generation pipeline
         run: python main.py
+
+              - name: Debug secrets and files
+        run: |
+          echo "=== .env contents ==="
+          cat .env | sed 's/\(.*\)=.*/\1=***/'
+          echo ""
+          echo "=== credentials.json exists? ==="
+          ls -l credentials.json
+          echo ""
+          echo "=== Sheet ID ==="
+          grep SHEET_ID .env | cut -d'=' -f2
