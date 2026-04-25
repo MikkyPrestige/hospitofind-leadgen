@@ -144,10 +144,9 @@ def enrich_lead(username, post_text=""):
     public_email = profile.get("public_email")
     name = extract_name(username, post_text)
 
-    # ------------------------------------------------------------
-    # Safety: if the username is a placeholder, skip email guessing
-    # ------------------------------------------------------------
-    if username.lower() in ("unknown_author", "deleted", "removed", "keyword"):
+    # Safety: if the username is a placeholder or bot‑like, skip email guessing
+    non_personal = {"unknown_author", "deleted", "removed", "keyword", "automoderator"}
+    if username.lower() in non_personal or re.search(r'--|bot$', username, re.IGNORECASE):
         return {
             "username": username,
             "name": name,

@@ -23,6 +23,12 @@ else:
 
 log = setup_logging()
 
+# Usernames to skip (bots, moderators, deleted accounts)
+SKIP_USERNAMES = {
+    "automoderator", "deleted", "removed", "reddit", "[deleted]",
+    "unknown_author", "keyword"   # keep 'keyword' as safety
+}
+
 
 def process_lead(post, sent_ids, blacklist):
     """
@@ -41,6 +47,11 @@ def process_lead(post, sent_ids, blacklist):
     # 2. Blacklist check
     if is_blacklisted(author, blacklist):
         log.info("Author blacklisted: u/%s", author)
+        return False
+
+            # 2.5 Skip known bot / non‑personal usernames
+    if author.lower() in SKIP_USERNAMES or author.lower().startswith("auto"):
+        log.info("Skipping bot/non‑personal user: u/%s", author)
         return False
 
     # 3. Intent scoring
