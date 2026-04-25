@@ -42,16 +42,16 @@ jobs:
           echo "TENANT_ID=${{ secrets.TENANT_ID }}" >> .env
           echo "REFRESH_TOKEN=${{ secrets.REFRESH_TOKEN }}" >> .env
 
-      - name: Run lead generation pipeline
-        run: python main.py
-
-              - name: Debug secrets and files
+                - name: Debug secrets and files
         run: |
-          echo "=== .env contents ==="
-          cat .env | sed 's/\(.*\)=.*/\1=***/'
+          echo "=== .env contents (masked) ==="
+          cat .env | sed 's/=.*/=****/'
           echo ""
           echo "=== credentials.json exists? ==="
           ls -l credentials.json
           echo ""
           echo "=== Sheet ID ==="
           grep SHEET_ID .env | cut -d'=' -f2
+
+      - name: Run lead generation pipeline
+        run: python main.py
