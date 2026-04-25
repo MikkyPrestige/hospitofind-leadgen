@@ -179,21 +179,22 @@ def fetch_recent_posts():
                 posts.append(parsed)
                 log.info("Parsed F5Bot alert: %s", parsed["url"])
             else:
-                # Debug: log raw email content for inspection
-                raw_body = ""
-                if msg.is_multipart():
-                    for part in msg.walk():
-                        if part.get_content_type() == "text/plain":
-                            payload = part.get_payload(decode=True)
-                            if payload:
-                                raw_body = payload.decode("utf-8", errors="replace")
-                                break
-                else:
-                    payload = msg.get_payload(decode=True)
-                    if payload:
-                        raw_body = payload.decode("utf-8", errors="replace")
                 log.warning("Failed to parse F5Bot email. Subject: %s", _decode_email_header(msg["Subject"]))
-                log.warning("Raw body (first 500 chars): %s", raw_body[:500])
+
+            # Always log raw body for inspection (first 500 chars)
+            raw_body = ""
+            if msg.is_multipart():
+                for part in msg.walk():
+                    if part.get_content_type() == "text/plain":
+                        payload = part.get_payload(decode=True)
+                        if payload:
+                            raw_body = payload.decode("utf-8", errors="replace")
+                            break
+            else:
+                payload = msg.get_payload(decode=True)
+                if payload:
+                    raw_body = payload.decode("utf-8", errors="replace")
+            log.info("Raw email body (first 500 chars): %s", raw_body[:500])
 
             # Mark as read so it won't be processed again
             mail.store(eid, '+FLAGS', '\\Seen')
