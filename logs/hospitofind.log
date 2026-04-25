@@ -1,2 +1,106 @@
 2026-04-24 21:19:18,940 [INFO] HospitoFind: Utils test: logging works
 2026-04-24 21:19:18,940 [WARNING] HospitoFind: Attempt 1/2 for flaky_func failed: Simulated failure. Retrying in 0s...
+2026-04-25 02:12:17,444 [INFO] HospitoFind: ============================================================
+2026-04-25 02:12:17,444 [INFO] HospitoFind: HospitoFind Lead Generation Run — 2026-04-25T02:12:17.444768
+2026-04-25 02:12:17,444 [INFO] HospitoFind: DRY_RUN: True
+2026-04-25 02:12:17,444 [INFO] HospitoFind: Reddit mock mode active — using dummy posts.
+2026-04-25 02:12:17,444 [INFO] HospitoFind: Fetched 3 posts to evaluate
+2026-04-25 02:12:17,444 [INFO] HospitoFind: Post by u/john_doe scored 2, categories: {'competitor', 'need', 'strong_intent'}
+2026-04-25 02:12:25,679 [INFO] HospitoFind: DRY_RUN: would have PMed u/john_doe
+2026-04-25 02:12:25,679 [INFO] HospitoFind: PM result for u/john_doe: dry_run_skipped
+2026-04-25 02:12:25,679 [INFO] HospitoFind: DRY_RUN: would have emailed john_doe@gmail.com
+2026-04-25 02:12:25,679 [INFO] HospitoFind: Email result for u/john_doe: dry_run_skipped
+2026-04-25 02:12:25,685 [INFO] HospitoFind: Post by u/alice_smith scored 0, categories: {'travel', 'negative'}
+2026-04-25 02:12:25,687 [INFO] HospitoFind: Post score 0 below threshold 2 — skipping
+2026-04-25 02:12:29,074 [INFO] HospitoFind: Lead appended to sheet: alice_smith (Low Score)
+2026-04-25 02:12:29,074 [INFO] HospitoFind: Post by u/tom_jones scored 3, categories: {'strong_intent', 'need', 'travel', 'country'}
+2026-04-25 02:12:29,167 [INFO] HospitoFind: DRY_RUN: would have PMed u/tom_jones
+2026-04-25 02:12:29,167 [INFO] HospitoFind: PM result for u/tom_jones: dry_run_skipped
+2026-04-25 02:12:29,167 [INFO] HospitoFind: DRY_RUN: would have emailed tom_jones@gmail.com
+2026-04-25 02:12:29,167 [INFO] HospitoFind: Email result for u/tom_jones: dry_run_skipped
+2026-04-25 02:12:29,167 [INFO] HospitoFind: Run complete. Processed 2 new leads.
+2026-04-25 02:12:29,167 [INFO] HospitoFind: ============================================================
+2026-04-25 02:33:21,980 [INFO] HospitoFind: ============================================================
+2026-04-25 02:33:21,980 [INFO] HospitoFind: HospitoFind Lead Generation Run — 2026-04-25T02:33:21.980142
+2026-04-25 02:33:21,980 [INFO] HospitoFind: DRY_RUN: True
+2026-04-25 02:33:22,011 [INFO] HospitoFind: Reddit mock mode active — using dummy posts.
+2026-04-25 02:33:22,011 [INFO] HospitoFind: Fetched 3 posts to evaluate
+2026-04-25 02:33:22,013 [INFO] HospitoFind: Post by u/alice_smith scored 0, categories: {'travel', 'negative'}
+2026-04-25 02:33:22,013 [INFO] HospitoFind: Post score 0 below threshold 2 — skipping
+2026-04-25 02:33:25,047 [INFO] HospitoFind: Lead appended to sheet: alice_smith (Low Score)
+2026-04-25 02:33:25,047 [INFO] HospitoFind: Run complete. Processed 0 new leads.
+2026-04-25 02:33:25,054 [INFO] HospitoFind: ============================================================
+2026-04-25 02:39:49,621 [INFO] HospitoFind: ============================================================
+2026-04-25 02:39:49,621 [INFO] HospitoFind: HospitoFind Lead Generation Run — 2026-04-25T02:39:49.621473
+2026-04-25 02:39:49,621 [INFO] HospitoFind: DRY_RUN: True
+2026-04-25 02:39:49,621 [INFO] HospitoFind: Reddit mock mode active — using dummy posts.
+2026-04-25 02:39:49,621 [INFO] HospitoFind: Fetched 3 posts to evaluate
+2026-04-25 02:39:49,621 [INFO] HospitoFind: Post by u/john_doe scored 2, categories: {'need', 'competitor', 'strong_intent'}
+2026-04-25 02:40:04,940 [INFO] HospitoFind: Lead appended to sheet: john_doe (Qualified)
+2026-04-25 02:40:04,954 [INFO] HospitoFind: DRY_RUN: would have PMed u/john_doe
+2026-04-25 02:40:04,954 [INFO] HospitoFind: PM result for u/john_doe: dry_run_skipped
+2026-04-25 02:40:04,956 [INFO] HospitoFind: DRY_RUN: would have emailed john_doe@gmail.com
+2026-04-25 02:40:04,956 [INFO] HospitoFind: Email result for u/john_doe: dry_run_skipped
+2026-04-25 02:40:04,956 [INFO] HospitoFind: Post by u/alice_smith scored 0, categories: {'travel', 'negative'}
+2026-04-25 02:40:04,961 [INFO] HospitoFind: Post score 0 below threshold 2 — skipping
+2026-04-25 02:40:06,818 [INFO] HospitoFind: Lead appended to sheet: alice_smith (Low Score)
+2026-04-25 02:40:06,820 [INFO] HospitoFind: Post by u/tom_jones scored 3, categories: {'need', 'country', 'travel', 'strong_intent'}
+2026-04-25 02:40:08,751 [INFO] HospitoFind: Lead appended to sheet: tom_jones (Qualified)
+2026-04-25 02:40:08,753 [INFO] HospitoFind: DRY_RUN: would have PMed u/tom_jones
+2026-04-25 02:40:08,753 [INFO] HospitoFind: PM result for u/tom_jones: dry_run_skipped
+2026-04-25 02:40:08,753 [INFO] HospitoFind: DRY_RUN: would have emailed tom_jones@gmail.com
+2026-04-25 02:40:08,755 [INFO] HospitoFind: Email result for u/tom_jones: dry_run_skipped
+2026-04-25 02:40:08,758 [INFO] HospitoFind: Run complete. Processed 2 new leads.
+2026-04-25 02:40:08,758 [INFO] HospitoFind: ============================================================
+2026-04-25 02:50:43,170 [INFO] HospitoFind: ============================================================
+2026-04-25 02:50:43,174 [INFO] HospitoFind: HospitoFind Lead Generation Run — 2026-04-25T02:50:43.174944
+2026-04-25 02:50:43,174 [INFO] HospitoFind: DRY_RUN: True
+2026-04-25 02:50:43,177 [INFO] HospitoFind: Reddit mock mode active — using dummy posts.
+2026-04-25 02:50:43,177 [INFO] HospitoFind: Fetched 3 posts to evaluate
+2026-04-25 02:50:43,177 [INFO] HospitoFind: Post by u/john_doe scored 2, categories: {'competitor', 'need', 'strong_intent'}
+2026-04-25 02:50:52,233 [INFO] HospitoFind: Lead appended to sheet: john_doe (Qualified)
+2026-04-25 02:50:52,233 [INFO] HospitoFind: DRY_RUN: would have PMed u/john_doe
+2026-04-25 02:50:55,586 [INFO] HospitoFind: Sent log appended for: john_doe
+2026-04-25 02:50:55,588 [INFO] HospitoFind: PM result for u/john_doe: dry_run_skipped
+2026-04-25 02:50:55,588 [INFO] HospitoFind: DRY_RUN: would have emailed john_doe@gmail.com
+2026-04-25 02:50:57,590 [INFO] HospitoFind: Sent log appended for: john_doe
+2026-04-25 02:50:57,590 [INFO] HospitoFind: Email result for u/john_doe: dry_run_skipped
+2026-04-25 02:50:57,595 [INFO] HospitoFind: Post by u/alice_smith scored 0, categories: {'negative', 'travel'}
+2026-04-25 02:50:57,597 [INFO] HospitoFind: Post score 0 below threshold 2 — skipping
+2026-04-25 02:51:01,749 [INFO] HospitoFind: Lead appended to sheet: alice_smith (Low Score)
+2026-04-25 02:51:01,749 [INFO] HospitoFind: Post by u/tom_jones scored 3, categories: {'strong_intent', 'need', 'travel', 'country'}
+2026-04-25 02:51:03,908 [INFO] HospitoFind: Lead appended to sheet: tom_jones (Qualified)
+2026-04-25 02:51:03,909 [INFO] HospitoFind: DRY_RUN: would have PMed u/tom_jones
+2026-04-25 02:51:06,407 [INFO] HospitoFind: Sent log appended for: tom_jones
+2026-04-25 02:51:06,407 [INFO] HospitoFind: PM result for u/tom_jones: dry_run_skipped
+2026-04-25 02:51:06,409 [INFO] HospitoFind: DRY_RUN: would have emailed tom_jones@gmail.com
+2026-04-25 02:51:08,617 [INFO] HospitoFind: Sent log appended for: tom_jones
+2026-04-25 02:51:08,622 [INFO] HospitoFind: Email result for u/tom_jones: dry_run_skipped
+2026-04-25 02:51:08,624 [INFO] HospitoFind: Run complete. Processed 2 new leads.
+2026-04-25 02:51:08,624 [INFO] HospitoFind: ============================================================
+2026-04-25 03:00:38,980 [INFO] HospitoFind: ============================================================
+2026-04-25 03:00:38,982 [INFO] HospitoFind: HospitoFind Lead Generation Run — 2026-04-25T03:00:38.982845
+2026-04-25 03:00:38,982 [INFO] HospitoFind: DRY_RUN: True
+2026-04-25 03:00:38,984 [INFO] HospitoFind: Reddit mock mode active — using dummy posts.
+2026-04-25 03:00:38,984 [INFO] HospitoFind: Fetched 3 posts to evaluate
+2026-04-25 03:00:38,984 [INFO] HospitoFind: Post by u/john_doe scored 2, categories: {'need', 'strong_intent', 'competitor'}
+2026-04-25 03:00:51,894 [INFO] HospitoFind: Lead appended to sheet: john_doe (Qualified)
+2026-04-25 03:00:51,894 [INFO] HospitoFind: DRY_RUN: would have PMed u/john_doe
+2026-04-25 03:00:54,446 [INFO] HospitoFind: Sent log appended for: john_doe
+2026-04-25 03:00:54,446 [INFO] HospitoFind: PM result for u/john_doe: dry_run_skipped
+2026-04-25 03:00:54,446 [INFO] HospitoFind: DRY_RUN: would have emailed john_doe@gmail.com
+2026-04-25 03:00:56,184 [INFO] HospitoFind: Sent log appended for: john_doe
+2026-04-25 03:00:56,184 [INFO] HospitoFind: Email result for u/john_doe: dry_run_skipped
+2026-04-25 03:00:56,193 [INFO] HospitoFind: Post by u/alice_smith scored 0, categories: {'travel', 'negative'}
+2026-04-25 03:00:56,193 [INFO] HospitoFind: Post score 0 below threshold 2 — skipping
+2026-04-25 03:00:58,034 [INFO] HospitoFind: Lead appended to sheet: alice_smith (Low Score)
+2026-04-25 03:00:58,041 [INFO] HospitoFind: Post by u/tom_jones scored 3, categories: {'need', 'travel', 'strong_intent', 'country'}
+2026-04-25 03:00:59,985 [INFO] HospitoFind: Lead appended to sheet: tom_jones (Qualified)
+2026-04-25 03:00:59,985 [INFO] HospitoFind: DRY_RUN: would have PMed u/tom_jones
+2026-04-25 03:01:01,706 [INFO] HospitoFind: Sent log appended for: tom_jones
+2026-04-25 03:01:01,706 [INFO] HospitoFind: PM result for u/tom_jones: dry_run_skipped
+2026-04-25 03:01:01,722 [INFO] HospitoFind: DRY_RUN: would have emailed tom_jones@gmail.com
+2026-04-25 03:01:03,419 [INFO] HospitoFind: Sent log appended for: tom_jones
+2026-04-25 03:01:03,423 [INFO] HospitoFind: Email result for u/tom_jones: dry_run_skipped
+2026-04-25 03:01:03,427 [INFO] HospitoFind: Run complete. Processed 2 new leads.
+2026-04-25 03:01:03,427 [INFO] HospitoFind: ============================================================

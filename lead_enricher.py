@@ -57,7 +57,7 @@ def extract_name(username, post_text=""):
 
     # Very simple heuristic: find the first word that starts with a capital
     # and is not a common stopword or the username.
-    stopwords = {"I", "I'm", "I'll", "I've", "Hey", "Hi", "Hello", "Thanks", "Please", "My"}
+    stopwords = {"I", "I'm", "I'll", "I've", "Hey", "Hi", "Hello", "Thanks", "Please", "My", "Where", "What", "When",  "Why", "How", "Can", "Do", "Does", "Is", "Are"}
     words = post_text.split()
     for word in words:
         clean = word.strip(",.?!;:'\"")

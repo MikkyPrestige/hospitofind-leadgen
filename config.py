@@ -31,11 +31,18 @@ SHEET_NAME_LEADS = "Leads"
 SHEET_NAME_SENT_LOG = "Sent_Log"
 SHEET_NAME_BLACKLIST = "Blacklist"
 
+# =============================================================================
+# 4. Azure
+# =============================================================================
+TENANT_ID = os.getenv("TENANT_ID")
+CLIENT_ID = os.getenv("CLIENT_ID")
+REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
+
 # Path to the service account JSON key file (should NOT be committed)
 CREDENTIALS_FILE = "credentials.json"
 
 # =============================================================================
-# 4. HospitoFind details (for CAN-SPAM compliance and personalisation)
+# 5. HospitoFind details (for CAN-SPAM compliance and personalisation)
 # =============================================================================
 YOUR_NAME = "HospitoFind"
 YOUR_WEBSITE = "https://hospitofind.online/"
@@ -43,7 +50,7 @@ YOUR_PHYSICAL_ADDRESS = "Your Company Address, Lagos, Nigeria"
 UNSUBSCRIBE_LINK = "https://forms.gle/your-unsubscribe-form"   # Replace with actual unsubscribe URL
 
 # =============================================================================
-# 5. Keywords (from the approved Refined Keyword List)
+# 6. Keywords (from the approved Refined Keyword List)
 # =============================================================================
 NEED_KEYWORDS = [
     "need hospital in", "find hospital in", "looking for hospital",
